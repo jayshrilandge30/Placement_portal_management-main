@@ -3,7 +3,7 @@
 
 session_start();
 
-if(empty($_SESSION['id_user'])) {
+if(empty($_SESSION['id_company'])) {
   header("Location: ../index.php");
   exit();
 }
@@ -12,7 +12,7 @@ require_once("../db.php");
 
 if(isset($_POST)) {
 	
-	$sql = "UPDATE users SET active='2' WHERE id_user='$_SESSION[id_user]'";
+	$sql = "UPDATE company SET active='3' WHERE id_company='$_SESSION[id_company]'";
 
 	if($conn->query($sql) == TRUE) {
 		header("Location: ../logout.php");

@@ -4,12 +4,12 @@
 session_start();
 
 //If user Not logged in then redirect them back to homepage. 
-//This is required if user tries to manually enter view-job-post.php in URL.
 if (empty($_SESSION['id_company'])) {
   header("Location: ../index.php");
   exit();
 }
 
+require_once("../db.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,6 +44,7 @@ if (empty($_SESSION['id_company'])) {
 
 <body class="hold-transition skin-green sidebar-mini">
   <div class="wrapper">
+
     <?php
 
     include 'header.php';
@@ -66,69 +67,67 @@ if (empty($_SESSION['id_company'])) {
                     <li><a href="edit-company.php"><i class="fa fa-tv"></i> Update Profile</a></li>
                     <li><a href="create-job-post.php"><i class="fa fa-file-o"></i> Post Drive</a></li>
                     <li><a href="my-job-post.php"><i class="fa fa-file-o"></i> Current Drives</a></li>
-                    <li><a href="job-applications.php"><i class="fa fa-file-o"></i> Drive Applications</a></li>
+                    <li class="active"><a href="job-applications.php"><i class="fa fa-file-o"></i> Drive Applications</a></li>
                     <li><a href="mailbox.php"><i class="fa fa-envelope"></i> Mailbox</a></li>
-                    <li class="active"><a href="settings.php"><i class="fa fa-gear"></i> Settings</a></li>
+                    <li><a href="settings.php"><i class="fa fa-gear"></i> Settings</a></li>
                     <li><a href="resume-database.php"><i class="fa fa-user"></i> Resume Database</a></li>
                     <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
-                  </ul>
                   </ul>
                 </div>
               </div>
             </div>
             <div class="col-md-9 bg-white padding-2">
-              <h2><i>Account Settings</i></h2>
-              <p>In this section you can change your name and account password</p>
-              <div class="row">
-                <div class="col-md-6">
-                  <form id="changePassword" action="change-password.php" method="post">
-                    <div class="form-group">
-                      <input id="password" class="form-control input-lg" type="password" name="password" autocomplete="off" placeholder="Password" required>
-                    </div>
-                    <div class="form-group">
-                      <input id="cpassword" class="form-control input-lg" type="password" autocomplete="off" placeholder="Confirm Password" required>
-                    </div>
-                    <div class="form-group">
-                      <button type="submit" class="btn btn-flat btn-success btn-lg">Change Password</button>
-                    </div>
-                    <div id="passwordError" class="color-red text-center hide-me">
-                      Password Mismatch!!
-                    </div>
-                  </form>
-                </div>
-                <div class="col-md-6">
-                  <form action="update-name.php" method="post">
-                    <div class="form-group">
-                      <label>Your Name (Full Name)</label>
-                      <input class="form-control input-lg" name="name" type="text">
-                    </div>
-                    <div class="form-group">
-                      <button type="submit" class="btn btn-flat btn-primary btn-lg">Change Name</button>
-                    </div>
-                  </form>
-                </div>
+              <h2>Recent Applications</h2>
+              <div class="input-group input-group-lg">
+                <input type="text" id="searchBar" class="form-control" placeholder="Search Students">
+                <span class="input-group-btn">
+                  <button id="searchBtn" type="button" class="btn btn-info btn-flat">Go!</button>
+                </span>
               </div>
-              <br>
-              <br>
-              <div class="row">
-                <div class="col-md-6">
-                  <form action="deactivate-account.php" method="post">
-                    <label><input type="checkbox" required> I Want To Deactivate My Account</label>
-                    <button class="btn btn-danger btn-flat btn-lg">Deactivate My Account</button>
-                  </form>
-                </div>
-              </div>
+
+              <?php
+
+
+              $sql = "SELECT * FROM job_post INNER JOIN apply_job_post ON job_post.id_jobpost=apply_job_post.id_jobpost  INNER JOIN users ON users.id_user=apply_job_post.id_user WHERE apply_job_post.id_company='$_SESSION[id_company]'";
+
+
+              $result = $conn->query($sql);
+              // echo "$result->num_rows";
+              // $_SESSION[id_company]
+              if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+              ?>
+                  <div class="attachment-block clearfix padding-2">
+                    <h4 class="attachment-heading"><a href="user-application.php?id=<?php echo $row['id_user']; ?>&id_jobpost=<?php echo $row['id_jobpost']; ?>"><?php echo $row['jobtitle'] . ' @ (' . $row['firstname'] . ' ' . $row['lastname'] . ')'; ?></a></h4>
+                    <div class="attachment-text padding-2">
+                      <div class="pull-left"><i class="fa fa-calendar"></i> <?php echo $row['createdat']; ?></div>
+                      <?php
+
+                      if ($row['status'] == 0) {
+                        echo '<div class="pull-right"><strong class="text-orange">Placed</strong></div>';
+                      } else if ($row['status'] == 1) {
+                        echo '<div class="pull-right"><strong class="text-red">Rejected</strong></div>';
+                      } else if ($row['status'] == 2) {
+                        echo '<div class="pull-right"><strong class="text-green">Applied</strong></div> ';
+                      }
+                      ?>
+
+                    </div>
+                  </div>
+
+              <?php
+                }
+              }
+              ?>
 
             </div>
           </div>
-        </div>
       </section>
 
 
 
     </div>
     <!-- /.content-wrapper -->
-
     <footer class="main-footer" style="margin-left: 0px;">
       <div class="text-center">
         <strong>Copyright &copy; 2022 <a href="scsit@Davv">Placement Portal</a>.</strong> All rights
@@ -136,10 +135,7 @@ if (empty($_SESSION['id_company'])) {
       </div>
     </footer>
 
-    <!-- /.control-sidebar -->
-    <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
+
 
   </div>
   <!-- ./wrapper -->
@@ -150,16 +146,6 @@ if (empty($_SESSION['id_company'])) {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <!-- AdminLTE App -->
   <script src="../js/adminlte.min.js"></script>
-  <script>
-    $("#changePassword").on("submit", function(e) {
-      e.preventDefault();
-      if ($('#password').val() != $('#cpassword').val()) {
-        $('#passwordError').show();
-      } else {
-        $(this).unbind('submit').submit();
-      }
-    });
-  </script>
 </body>
 
 </html>

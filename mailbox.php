@@ -4,7 +4,7 @@
 session_start();
 
 //If user Not logged in then redirect them back to homepage. 
-if (empty($_SESSION['id_user'])) {
+if (empty($_SESSION['id_company'])) {
   header("Location: ../index.php");
   exit();
 }
@@ -48,7 +48,8 @@ require_once("../db.php");
   <div class="wrapper">
 
     <?php
-    include 'header.php'
+
+    include 'header.php';
     ?>
 
     <!-- Content Wrapper. Contains page content -->
@@ -60,21 +61,24 @@ require_once("../db.php");
             <div class="col-md-3">
               <div class="box box-solid">
                 <div class="box-header with-border">
-                  <h3 class="box-title ">Welcome <b><?php echo $_SESSION['name']; ?></b></h3>
+                  <h3 class="box-title">Welcome <b><?php echo $_SESSION['name']; ?></b></h3>
                 </div>
                 <div class="box-body no-padding">
-                  <ul class="nav nav-pills nav-stacked ul1">
-                    <li><a href="edit-profile.php"><i class="fa fa-user"></i> Edit Profile</a></li>
-                    <li><a href="index.php"><i class="fa fa-address-card-o"></i> My Applications</a></li>
-                    <!-- <li><a href="../jobs.php"><i class="fa fa-list-ul"></i> Active Drives</a></li> -->
+                  <ul class="nav nav-pills nav-stacked">
+                    <li><a href="index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                    <li><a href="edit-company.php"><i class="fa fa-tv"></i> Update Profile</a></li>
+                    <li><a href="create-job-post.php"><i class="fa fa-file-o"></i> Post Drive</a></li>
+                    <li><a href="my-job-post.php"><i class="fa fa-file-o"></i> Current Drives</a></li>
+                    <li><a href="job-applications.php"><i class="fa fa-file-o"></i> Drive Applications</a></li>
                     <li class="active"><a href="mailbox.php"><i class="fa fa-envelope"></i> Mailbox</a></li>
                     <li><a href="settings.php"><i class="fa fa-gear"></i> Settings</a></li>
+                    <li><a href="resume-database.php"><i class="fa fa-user"></i> Resume Database</a></li>
                     <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
+                  </ul>
                   </ul>
                 </div>
               </div>
             </div>
-
             <div class="col-md-9 bg-white padding-2">
               <section class="content">
                 <div class="row">
@@ -99,7 +103,7 @@ require_once("../db.php");
                             </thead>
                             <tbody>
                               <?php
-                              $sql = "SELECT * FROM mailbox WHERE id_fromuser='$_SESSION[id_user]' OR id_touser='$_SESSION[id_user]'";
+                              $sql = "SELECT * FROM mailbox WHERE id_fromuser='$_SESSION[id_company]' OR id_touser='$_SESSION[id_company]'";
                               $result = $conn->query($sql);
                               if ($result->num_rows >  0) {
                                 while ($row = $result->fetch_assoc()) {
@@ -146,7 +150,7 @@ require_once("../db.php");
 
     <footer class="main-footer" style="margin-left: 0px;">
       <div class="text-center">
-        <strong>Copyright &copy; 2022 <a href="scsit@Davv">Placement Portal</a>.</strong> All rights
+        <strong>Copyright &copy; 2022 <a href="learningfromscratch.online">Placement Portal</a>.</strong> All rights
         reserved.
       </div>
     </footer>
@@ -173,26 +177,3 @@ require_once("../db.php");
 </body>
 
 </html>
-
-<style>
-  /* my css  */
-
-  .box {
-
-    font-size: medium;
-    font-family: sans-serif;
-  }
-
-
-  li {
-    color: aqua;
-  }
-
-
-  @media only screen and (max-width: 989px) {
-    .box {
-      margin: auto;
-      text-align: center;
-    }
-  }
-</style>

@@ -15,13 +15,10 @@ require_once("../db.php");
 if(isset($_POST)) {
 
 	//Escape Special Characters in String
-	$password = mysqli_real_escape_string($conn, $_POST['password']);
-
-	//Encrypt Password
-	$password = base64_encode(strrev(md5($password)));
+	$name = mysqli_real_escape_string($conn, $_POST['name']);
 
 	//sql query to check user login
-	$sql = "UPDATE company SET password='$password' WHERE id_company='$_SESSION[id_company]'";
+	$sql = "UPDATE company SET name='$name' WHERE id_company='$_SESSION[id_company]'";
 	if($conn->query($sql) === true) {
 		header("Location: index.php");
 		exit();

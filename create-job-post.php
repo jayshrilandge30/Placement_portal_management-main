@@ -4,12 +4,12 @@
 session_start();
 
 //If user Not logged in then redirect them back to homepage. 
-//This is required if user tries to manually enter view-job-post.php in URL.
 if (empty($_SESSION['id_company'])) {
   header("Location: ../index.php");
   exit();
 }
 
+require_once("../db.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,6 +31,17 @@ if (empty($_SESSION['id_company'])) {
   <link rel="stylesheet" href="../css/_all-skins.min.css">
   <!-- Custom -->
   <link rel="stylesheet" href="../css/custom.css">
+
+  <script src="../js/tinymce/tinymce.min.js"></script>
+
+  <script>
+    tinymce.init({
+      selector: '#description',
+      height: 300
+    });
+  </script>
+
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -44,6 +55,7 @@ if (empty($_SESSION['id_company'])) {
 
 <body class="hold-transition skin-green sidebar-mini">
   <div class="wrapper">
+
     <?php
 
     include 'header.php';
@@ -64,11 +76,11 @@ if (empty($_SESSION['id_company'])) {
                   <ul class="nav nav-pills nav-stacked">
                     <li><a href="index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
                     <li><a href="edit-company.php"><i class="fa fa-tv"></i> Update Profile</a></li>
-                    <li><a href="create-job-post.php"><i class="fa fa-file-o"></i> Post Drive</a></li>
+                    <li class="active"><a href="create-job-post.php"><i class="fa fa-file-o"></i> Post Drive</a></li>
                     <li><a href="my-job-post.php"><i class="fa fa-file-o"></i> Current Drives</a></li>
                     <li><a href="job-applications.php"><i class="fa fa-file-o"></i> Drive Applications</a></li>
                     <li><a href="mailbox.php"><i class="fa fa-envelope"></i> Mailbox</a></li>
-                    <li class="active"><a href="settings.php"><i class="fa fa-gear"></i> Settings</a></li>
+                    <li><a href="settings.php"><i class="fa fa-gear"></i> Settings</a></li>
                     <li><a href="resume-database.php"><i class="fa fa-user"></i> Resume Database</a></li>
                     <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
                   </ul>
@@ -77,46 +89,40 @@ if (empty($_SESSION['id_company'])) {
               </div>
             </div>
             <div class="col-md-9 bg-white padding-2">
-              <h2><i>Account Settings</i></h2>
-              <p>In this section you can change your name and account password</p>
+              <h2>Post a new Drive</h2>
               <div class="row">
-                <div class="col-md-6">
-                  <form id="changePassword" action="change-password.php" method="post">
+                <form method="post" action="addpost.php">
+                  <div class="col-md-12 latest-job ">
                     <div class="form-group">
-                      <input id="password" class="form-control input-lg" type="password" name="password" autocomplete="off" placeholder="Password" required>
-                    </div>
-                    <div class="form-group">
-                      <input id="cpassword" class="form-control input-lg" type="password" autocomplete="off" placeholder="Confirm Password" required>
+                      <input class="form-control input-lg" type="text" id="jobtitle" name="jobtitle" placeholder="Company Name">
                     </div>
                     <div class="form-group">
-                      <button type="submit" class="btn btn-flat btn-success btn-lg">Change Password</button>
-                    </div>
-                    <div id="passwordError" class="color-red text-center hide-me">
-                      Password Mismatch!!
-                    </div>
-                  </form>
-                </div>
-                <div class="col-md-6">
-                  <form action="update-name.php" method="post">
-                    <div class="form-group">
-                      <label>Your Name (Full Name)</label>
-                      <input class="form-control input-lg" name="name" type="text">
+                      <textarea class="form-control input-lg" id="description" name="description" placeholder="Job Description"></textarea>
                     </div>
                     <div class="form-group">
-                      <button type="submit" class="btn btn-flat btn-primary btn-lg">Change Name</button>
+                      <input type="number" class="form-control  input-lg" id="minimumsalary" autocomplete="off" name="minimumsalary" placeholder="CTC" required="">
                     </div>
-                  </form>
-                </div>
-              </div>
-              <br>
-              <br>
-              <div class="row">
-                <div class="col-md-6">
-                  <form action="deactivate-account.php" method="post">
-                    <label><input type="checkbox" required> I Want To Deactivate My Account</label>
-                    <button class="btn btn-danger btn-flat btn-lg">Deactivate My Account</button>
-                  </form>
-                </div>
+                    <div class="form-group">
+                      <input type="number" class="form-control  input-lg" id="maximumsalary" name="maximumsalary" placeholder="Eligibility Criteria" required="">
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control  input-lg" id="experience" autocomplete="off" name="experience" placeholder="Role" required="">
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control  input-lg" id="qualification" name="qualification" placeholder="Qualification Required" required="">
+                    </div>
+
+
+                    <!-- adding image to drive post  -->
+
+
+
+
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-flat btn-success">Create</button>
+                    </div>
+                  </div>
+                </form>
               </div>
 
             </div>
@@ -128,7 +134,6 @@ if (empty($_SESSION['id_company'])) {
 
     </div>
     <!-- /.content-wrapper -->
-
     <footer class="main-footer" style="margin-left: 0px;">
       <div class="text-center">
         <strong>Copyright &copy; 2022 <a href="scsit@Davv">Placement Portal</a>.</strong> All rights
@@ -150,16 +155,6 @@ if (empty($_SESSION['id_company'])) {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <!-- AdminLTE App -->
   <script src="../js/adminlte.min.js"></script>
-  <script>
-    $("#changePassword").on("submit", function(e) {
-      e.preventDefault();
-      if ($('#password').val() != $('#cpassword').val()) {
-        $('#passwordError').show();
-      } else {
-        $(this).unbind('submit').submit();
-      }
-    });
-  </script>
 </body>
 
 </html>

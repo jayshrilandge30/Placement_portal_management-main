@@ -4,12 +4,12 @@
 session_start();
 
 //If user Not logged in then redirect them back to homepage. 
-//This is required if user tries to manually enter view-job-post.php in URL.
 if (empty($_SESSION['id_company'])) {
   header("Location: ../index.php");
   exit();
 }
 
+require_once("../db.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -63,12 +63,12 @@ if (empty($_SESSION['id_company'])) {
                 <div class="box-body no-padding">
                   <ul class="nav nav-pills nav-stacked">
                     <li><a href="index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                    <li><a href="edit-company.php"><i class="fa fa-tv"></i> Update Profile</a></li>
+                    <li class="active"><a href="edit-company.php"><i class="fa fa-tv"></i> Update Profile</a></li>
                     <li><a href="create-job-post.php"><i class="fa fa-file-o"></i> Post Drive</a></li>
                     <li><a href="my-job-post.php"><i class="fa fa-file-o"></i> Current Drives</a></li>
                     <li><a href="job-applications.php"><i class="fa fa-file-o"></i> Drive Applications</a></li>
                     <li><a href="mailbox.php"><i class="fa fa-envelope"></i> Mailbox</a></li>
-                    <li class="active"><a href="settings.php"><i class="fa fa-gear"></i> Settings</a></li>
+                    <li><a href="settings.php"><i class="fa fa-gear"></i> Settings</a></li>
                     <li><a href="resume-database.php"><i class="fa fa-user"></i> Resume Database</a></li>
                     <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
                   </ul>
@@ -77,47 +77,73 @@ if (empty($_SESSION['id_company'])) {
               </div>
             </div>
             <div class="col-md-9 bg-white padding-2">
-              <h2><i>Account Settings</i></h2>
-              <p>In this section you can change your name and account password</p>
+              <h2><i>Co-Ordinator Profile</i></h2>
+              <p>In this section you can change your details</p>
               <div class="row">
-                <div class="col-md-6">
-                  <form id="changePassword" action="change-password.php" method="post">
-                    <div class="form-group">
-                      <input id="password" class="form-control input-lg" type="password" name="password" autocomplete="off" placeholder="Password" required>
-                    </div>
-                    <div class="form-group">
-                      <input id="cpassword" class="form-control input-lg" type="password" autocomplete="off" placeholder="Confirm Password" required>
-                    </div>
-                    <div class="form-group">
-                      <button type="submit" class="btn btn-flat btn-success btn-lg">Change Password</button>
-                    </div>
-                    <div id="passwordError" class="color-red text-center hide-me">
-                      Password Mismatch!!
-                    </div>
-                  </form>
-                </div>
-                <div class="col-md-6">
-                  <form action="update-name.php" method="post">
-                    <div class="form-group">
-                      <label>Your Name (Full Name)</label>
-                      <input class="form-control input-lg" name="name" type="text">
-                    </div>
-                    <div class="form-group">
-                      <button type="submit" class="btn btn-flat btn-primary btn-lg">Change Name</button>
-                    </div>
-                  </form>
-                </div>
+                <form action="update-company.php" method="post" enctype="multipart/form-data">
+                  <?php
+                  $sql = "SELECT * FROM company WHERE id_company='$_SESSION[id_company]'";
+                  $result = $conn->query($sql);
+
+                  if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                  ?>
+                      <div class="col-md-6 latest-job ">
+                        <div class="form-group">
+                          <label>Cell Member - Name</label>
+                          <input type="text" class="form-control input-lg" name="companyname" value="<?php echo $row['companyname']; ?>" required="">
+                        </div>
+                        <div class="form-group">
+                          <label>Website</label>
+                          <input type="text" class="form-control input-lg" name="website" value="<?php echo $row['website']; ?>" required="">
+                        </div>
+                        <div class="form-group">
+                          <label for="email">Email address</label>
+                          <input type="email" class="form-control input-lg" id="email" placeholder="Email" value="<?php echo $row['email']; ?>" readonly>
+                        </div>
+                        <div class="form-group">
+                          <label>About Me</label>
+                          <textarea class="form-control input-lg" rows="4" name="aboutme"><?php echo $row['aboutme']; ?></textarea>
+                        </div>
+                        <div class="form-group">
+                          <button type="submit" class="btn btn-flat btn-success">Update Profile</button>
+                        </div>
+                      </div>
+                      <div class="col-md-6 latest-job ">
+                        <div class="form-group">
+                          <label for="contactno">Contact Number</label>
+                          <input type="text" class="form-control input-lg" id="contactno" name="contactno" placeholder="Contact Number" value="<?php echo $row['contactno']; ?>">
+                        </div>
+                        <div class="form-group">
+                          <label for="city">City</label>
+                          <input type="text" class="form-control input-lg" id="city" name="city" value="<?php echo $row['city']; ?>" placeholder="city">
+                        </div>
+                        <div class="form-group">
+                          <label for="state">State</label>
+                          <input type="text" class="form-control input-lg" id="state" name="state" placeholder="state" value="<?php echo $row['state']; ?>">
+                        </div>
+                        <div class="form-group">
+                          <label>Change Profile</label>
+                          <input type="file" name="image" class="btn btn-default">
+                          <?php if ($row['logo'] != "") { ?>
+                            <img src="../uploads/logo/<?php echo $row['logo']; ?>" class="img-responsive" style="max-height: 200px; max-width: 200px;">
+                          <?php } ?>
+                        </div>
+                      </div>
+                  <?php
+                    }
+                  }
+                  ?>
+                </form>
               </div>
-              <br>
-              <br>
-              <div class="row">
-                <div class="col-md-6">
-                  <form action="deactivate-account.php" method="post">
-                    <label><input type="checkbox" required> I Want To Deactivate My Account</label>
-                    <button class="btn btn-danger btn-flat btn-lg">Deactivate My Account</button>
-                  </form>
+              <?php if (isset($_SESSION['uploadError'])) { ?>
+                <div class="row">
+                  <div class="col-md-12 text-center">
+                    <?php echo $_SESSION['uploadError']; ?>
+                  </div>
                 </div>
-              </div>
+              <?php unset($_SESSION['uploadError']);
+              } ?>
 
             </div>
           </div>
@@ -150,16 +176,6 @@ if (empty($_SESSION['id_company'])) {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <!-- AdminLTE App -->
   <script src="../js/adminlte.min.js"></script>
-  <script>
-    $("#changePassword").on("submit", function(e) {
-      e.preventDefault();
-      if ($('#password').val() != $('#cpassword').val()) {
-        $('#passwordError').show();
-      } else {
-        $(this).unbind('submit').submit();
-      }
-    });
-  </script>
 </body>
 
 </html>

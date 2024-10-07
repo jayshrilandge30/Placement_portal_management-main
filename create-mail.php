@@ -4,7 +4,7 @@
 session_start();
 
 //If user Not logged in then redirect them back to homepage. 
-if (empty($_SESSION['id_user'])) {
+if (empty($_SESSION['id_company'])) {
   header("Location: ../index.php");
   exit();
 }
@@ -55,9 +55,26 @@ require_once("../db.php");
 <body class="hold-transition skin-green sidebar-mini">
   <div class="wrapper">
 
-    <?php
-    include 'header.php'
-    ?>
+    <header class="main-header">
+
+      <!-- Logo -->
+      <a href="index.php" class="logo logo-bg">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>J</b>P</span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>Placement</b> Portal</span>
+      </a>
+
+      <!-- Header Navbar: style can be found in header.less -->
+      <nav class="navbar navbar-static-top">
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+
+          </ul>
+        </div>
+      </nav>
+    </header>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="margin-left: 0px;">
@@ -72,10 +89,14 @@ require_once("../db.php");
                 </div>
                 <div class="box-body no-padding">
                   <ul class="nav nav-pills nav-stacked">
-                    <li><a href="edit-profile.php"><i class="fa fa-user"></i> Edit Profile</a></li>
-                    <li><a href="index.php"><i class="fa fa-address-card-o"></i> My Applications</a></li>
+                    <li><a href="index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                    <li><a href="edit-company.php"><i class="fa fa-tv"></i> My Company</a></li>
+                    <li><a href="create-job-post.php"><i class="fa fa-file-o"></i> Create Job Post</a></li>
+                    <li><a href="my-job-post.php"><i class="fa fa-file-o"></i> My Job Post</a></li>
+                    <li><a href="job-applications.php"><i class="fa fa-file-o"></i> Job Application</a></li>
                     <li class="active"><a href="mailbox.php"><i class="fa fa-envelope"></i> Mailbox</a></li>
                     <li><a href="settings.php"><i class="fa fa-gear"></i> Settings</a></li>
+                    <li><a href="resume-database.php"><i class="fa fa-user"></i> Resume Database</a></li>
                     <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
                   </ul>
                 </div>
@@ -92,11 +113,11 @@ require_once("../db.php");
                     <div class="form-group">
                       <select name="to" class="form-control">
                         <?php
-                        $sql = "SELECT * FROM apply_job_post INNER JOIN company ON apply_job_post.id_company=company.id_company WHERE apply_job_post.id_user='$_SESSION[id_user]' AND apply_job_post.status='2'";
+                        $sql = "SELECT * FROM apply_job_post INNER JOIN users ON apply_job_post.id_user=users.id_user WHERE apply_job_post.id_company='$_SESSION[id_company]' AND apply_job_post.status='2'";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                           while ($row = $result->fetch_assoc()) {
-                            echo '<option value="' . $row['id_company'] . '">' . $row['companyname'] . '</option>';
+                            echo '<option value="' . $row['id_user'] . '">' . $row['firstname'] . ' ' . $row['lastname'] . '</option>';
                           }
                         }
                         ?>

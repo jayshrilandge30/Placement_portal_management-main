@@ -4,14 +4,14 @@
 session_start();
 
 //If user Not logged in then redirect them back to homepage. 
-if (empty($_SESSION['id_user'])) {
+if (empty($_SESSION['id_company'])) {
   header("Location: ../index.php");
   exit();
 }
 
 require_once("../db.php");
 
-$sql = "SELECT * FROM mailbox WHERE id_mailbox='$_GET[id_mail]' AND (id_fromuser='$_SESSION[id_user]' OR id_touser='$_SESSION[id_user]')";
+$sql = "SELECT * FROM mailbox WHERE id_mailbox='$_GET[id_mail]' AND (id_fromuser='$_SESSION[id_company]' OR id_touser='$_SESSION[id_company]')";
 $result = $conn->query($sql);
 if ($result->num_rows >  0) {
   $row = $result->fetch_assoc();
@@ -87,7 +87,8 @@ if ($result->num_rows >  0) {
   <div class="wrapper">
 
     <?php
-    include 'header.php'
+
+    include 'header.php';
     ?>
 
     <!-- Content Wrapper. Contains page content -->
@@ -103,11 +104,16 @@ if ($result->num_rows >  0) {
                 </div>
                 <div class="box-body no-padding">
                   <ul class="nav nav-pills nav-stacked">
-                    <li><a href="edit-profile.php"><i class="fa fa-user"></i> Edit Profile</a></li>
-                    <li><a href="index.php"><i class="fa fa-address-card-o"></i> My Applications</a></li>
-                    <li class="active"><a href="mailbox.php"><i class="fa fa-envelope"></i> Mailbox</a></li>
+                    <li><a href="index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                    <li><a href="edit-company.php"><i class="fa fa-tv"></i> Update Profile</a></li>
+                    <li><a href="create-job-post.php"><i class="fa fa-file-o"></i> Post Drive</a></li>
+                    <li class="active"><a href="my-job-post.php"><i class="fa fa-file-o"></i> Current Drives</a></li>
+                    <li><a href="job-applications.php"><i class="fa fa-file-o"></i> Drive Applications</a></li>
+                    <li><a href="mailbox.php"><i class="fa fa-envelope"></i> Mailbox</a></li>
                     <li><a href="settings.php"><i class="fa fa-gear"></i> Settings</a></li>
+                    <li><a href="resume-database.php"><i class="fa fa-user"></i> Resume Database</a></li>
                     <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
+                  </ul>
                   </ul>
                 </div>
               </div>
@@ -122,11 +128,7 @@ if ($result->num_rows >  0) {
                       <div class="box-body no-padding">
                         <div class="mailbox-read-info">
                           <h3><?php echo $row['subject']; ?></h3>
-                          <h5>From: <?php if ($row['fromuser'] == "company") {
-                                      echo $rowCompany['companyname'];
-                                    } else {
-                                      echo $rowUser['firstname'];
-                                    } ?>
+                          <h5>From: <?php echo $rowCompany['companyname']; ?>
                             <span class="mailbox-read-time pull-right"><?php echo date("d-M-Y h:i a", strtotime($row['createdAt'])); ?></span>
                           </h5>
                         </div>
