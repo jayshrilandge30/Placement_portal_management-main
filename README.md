@@ -1,96 +1,88 @@
-[![npm](https://img.shields.io/npm/l/es6-object-assign.svg)](https://www.npmjs.org/package/es6-object-assign)
-[![npm](https://img.shields.io/npm/v/es6-object-assign.svg)](https://www.npmjs.org/package/es6-object-assign)
+# Placement Portal Management System
 
-# ES6 Object.assign()
+This repository contains the source code for a Placement Portal Management System, designed to streamline and manage the placement process for educational institutions. The system facilitates the interaction between students, recruiters, and administrators, providing a centralized platform for job postings, applications, and placements.
 
-ECMAScript 2015 (ES2015/ES6) [Object.assign()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) polyfill and [ponyfill](https://ponyfill.com) for ECMAScript 5 environments.
+## Features
 
-The main definition of this package has been copied from the polyfill defined in the [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign).
+- Student Dashboard:
+  - Register and update profile information.
+  - View and apply for job postings.
+  - Track application status and interview schedules.
 
-## Installation
+- Recruiter Dashboard:
+  - Post job openings.
+  - Manage job applications and schedule interviews.
+  - Review and select candidates for placements.
 
-### NPM
+- Admin Dashboard:
+  - Manage student and recruiter accounts.
+  - Monitor placement activities and statistics.
+  - Generate reports on placement trends and outcomes.
 
-```bash
-npm install es6-object-assign
-```
+- Job Listings:
+  - Browse and search for job opportunities based on various criteria.
+  - Filter jobs by industry, location, and eligibility criteria.
 
-### Manual download and import
+- Communication Tools:
+  - Messaging and notification system for updates on applications and interviews.
+  - Announcements and alerts for important deadlines and events.
 
-The package is also available as a UMD module (compatible with AMD, CommonJS and exposing a global variable `ObjectAssign`) in `dist/object-assign.js` and `dist/object-assign.min.js` (833 bytes minified and gzipped).
+## Technologies Used
 
-The versions with automatic polyfilling are `dist/object-assign-auto.js` and `dist/object-assign-auto.min.js`.
+- PHP: Server-side scripting language for backend operations.
+- HTML/CSS: Frontend development for user interface and styling.
+- JavaScript: Enhancing interactivity and user experience.
+- MySQL: Database management for storing user data, job listings, and placement records.
+
+## Getting Started
+
+1. Clone the Repository:
+   ```bash
+   git clone https://github.com/jayshrilandge30/placement-portal.git
+   ```
+   
+2. Navigate to the Project Directory:
+   ```bash
+   cd placement-portal
+   ```
+
+3. Set Up the Database:
+   - Import the provided SQL file into your MySQL database.
+   - Configure the database connection settings in the `config.php` file.
+
+4. Run the Application:
+   - Host the project files on a local server environment like XAMPP or WAMP.
+   - Access the application through your web browser (`http://localhost/placement-portal`).
 
 ## Usage
 
-**CommonJS**:
+- Student Users:
+  - Register or log in to the portal.
+  - Update profile information and upload resumes.
+  - Browse job listings, apply for jobs, and track application statuses.
 
-```javascript
-// Polyfill, modifying the global Object
-require('es6-object-assign').polyfill();
-var obj = Object.assign({}, { foo: 'bar' });
+- Recruiter Users:
+  - Register or log in to the portal.
+  - Post job openings, review applications, and schedule interviews.
+  - Manage candidate selections and communicate with applicants.
 
-// Same version with automatic polyfilling
-require('es6-object-assign/auto');
-var obj = Object.assign({}, { foo: 'bar' });
+- Admin Users:
+  - Log in to the admin panel to manage user accounts and system configurations.
+  - Monitor and generate reports on placement activities and trends.
 
-// Or ponyfill, using a reference to the function without modifying globals
-var assign = require('es6-object-assign').assign;
-var obj = assign({}, { foo: 'bar' });
-```
+## Contributing
 
-**Globals**:
-
-Manual polyfill:
-
-```html
-<script src="<your-libs-directory>/object-assign.min.js"></script>
-<script>
-  // Polyfill, modifying the global Object
-  window.ObjectAssign.polyfill();
-  var obj = Object.assign({}, { foo: 'bar' });
-</script>
-```
-
-Automatic polyfill:
-
-```html
-<script src="<your-libs-directory>/object-assign-auto.min.js"></script>
-<script>
-  var obj = Object.assign({}, { foo: 'bar' });
-</script>
-```
-
-Ponyfill, without modifying globals:
-
-```html
-<script src="<your-libs-directory>/object-assign.min.js"></script>
-<script>
-  var assign = window.ObjectAssign.assign;
-  var obj = assign({}, { foo: 'bar' });
-</script>
-```
+Contributions are welcome! If you find any bugs or have suggestions for new features, please [open an issue](https://github.com/yourusername/placement-portal/issues) or submit a pull request.
 
 ## License
 
-The MIT License (MIT)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Copyright (c) 2017 Rubén Norte
+## Acknowledgements
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+We extend our gratitude to all contributors and developers who have contributed to the tools and libraries used in this project.
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+Thank you for using the Placement Portal Management System! For any questions or further assistance, feel free to reach out.
+
+Happy coding!
