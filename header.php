@@ -1,172 +1,50 @@
-<!-- Main header -->
-<header class="header">
-    <nav class="navbar">
-        <a href="#" class="nav-logo">Placement Portal</a>
-        <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="index.php" class="nav-link">Dashboard</a>
-            </li>
-            <li class="nav-item">
-                <a href="resume.php" class="nav-link">Create Resume</a>
-            </li>
-            <li class="nav-item">
-                <a href="notice.php" class="nav-link">Notice</a>
-            </li>
-            <li class="nav-item">
-                <a href="../jobs.php" class="nav-link">Active Drives</a>
-            </li>
-            <li class="nav-item">
-                <a href="../logout.php" class="nav-link">Log Out</a>
-            </li>
-        </ul>
-        <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-    </nav>
-</header>
+ <img src="assets/img/logo.png" height=70px" style="height:120px" />
+ <header id=" header" class="header fixed-top" data-scrollto-offset="0">
+     <div class="container-fluid d-flex align-items-center justify-content-between">
 
-<!-- Css code-->
+         <a href="index.php" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
 
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,400&display=swap');
+         </a>
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+         <nav id="navbar" class="navbar">
+             <ul>
 
-    html {
-        font-size: 62.5%;
-        font-family: 'Roboto', sans-serif;
-    }
+                 <li><a class="nav-link scrollto" href="index.php">Home</a></li>
+                 <li class="dropdown"><a href="login.php"><span>Login</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                     <ul>
 
-    li {
-        list-style: none;
-    }
+                         <li><a href="admin/index.php">Admin Login</a></li>
+                         <li><a href="login-candidates.php">Student Login</a></li>
+                         <li><a href="login-company.php">Placement Cell</a></li>
 
-    a {
-        text-decoration: none;
-        left: 0px;
-    }
 
-    .header {
-        border-bottom: 1px solid #E2E8F0;
-    }
+                     </ul>
+                 </li>
+                 <li class="dropdown"><a href="login.php"><span>Register</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                     <ul>
 
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 1.5rem;
-    }
+                         <!-- <li><a href="admin/index.php">Admin</a></li> -->
+                         <li><a href="register-candidates.php">Students</a></li>
+                         <li><a href="register-company.php">Placement Cell</a></li>
 
-    .hamburger {
-        display: none;
-    }
 
-    .bar {
-        display: block;
-        width: 25px;
-        height: 3px;
-        margin: 5px auto;
-        -webkit-transition: all 0.3s ease-in-out;
-        transition: all 0.3s ease-in-out;
-        background-color: #101010;
+                     </ul>
+                 </li>
 
-    }
 
-    .nav-menu {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+                 <!-- <li><a class="nav-link scrollto" href="login.php">Sign Up</a></li> -->
 
-    .nav-item {
-        margin-left: 5rem;
-    }
+                 <!-- <li><a class="nav-link scrollto" href="faq.php">FAQ</a></li> -->
 
-    .nav-link {
-        font-size: 1.6rem;
-        font-weight: 400;
-        color: #b3c6e0;
-    }
+                 <li><a class="nav-link scrollto" href="contact.php">Contact</a></li>
+                 <!-- <li><a class="nav-link scrollto" href="aboutus.php">FAQ</a></li> -->
 
-    .nav-link:hover {
-        color: #482ff7;
-    }
 
-    .nav-logo {
-        font-size: 2.1rem;
-        font-weight: 500;
-        color: #d0cce9;
+             </ul>
+             <i class="bi bi-list mobile-nav-toggle d-none"></i>
+         </nav><!-- .navbar -->
 
-    }
+         <a class="btn-getstarted scrollto" href="faq.php">FAQ</a>
 
-    @media only screen and (max-width: 768px) {
-        .nav-menu {
-            position: fixed;
-            left: -100%;
-            top: 5rem;
-            flex-direction: column;
-            background-color: #0b0606;
-            /* background-color: #482ff7; */
-            width: 100%;
-            border-radius: 10px;
-            text-align: center;
-            transition: 0.3s;
-            box-shadow:
-                0 10px 27px rgba(0, 0, 0, 0.05);
-            z-index: 10;
-
-        }
-
-        .nav-menu.active {
-            left: 0;
-        }
-
-        .nav-item {
-            margin: 2.5rem 0;
-        }
-
-        .hamburger {
-            display: block;
-            cursor: pointer;
-        }
-
-    }
-
-    // Inside the Media Query.
-
-    .hamburger.active .bar:nth-child(2) {
-        opacity: 0;
-    }
-
-    .hamburger.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-
-    .hamburger.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-    }
-</style>
-
-<!-- js files-->
-
-<script>
-    const hamburger = document.querySelector(".hamburger");
-    const navMenu = document.querySelector(".nav-menu");
-
-    hamburger.addEventListener("click", mobileMenu);
-
-    function mobileMenu() {
-        hamburger.classList.toggle("active");
-        navMenu.classList.toggle("active");
-    }
-</script>
-
-<script src="../js/sweetalert.js">
-
-</script>
+     </div>
+ </header>
