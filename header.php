@@ -6,12 +6,15 @@
             <li class="nav-item">
                 <a href="index.php" class="nav-link">Dashboard</a>
             </li>
-            <li class="nav-item">
-                <a href="notice.php" class="nav-link">Notice</a>
-            </li>
 
             <li class="nav-item">
-                <a href="create-job-post.php" class="nav-link">Post Drive</a>
+                <a href="postnotice.php" class="nav-link">Post Notice</a>
+            </li>
+            <li class="nav-item">
+                <a href="database.php" class="nav-link">Database</a>
+            </li>
+            <li class="nav-item">
+                <a href="placed.php" class="nav-link">Placed Students</a>
             </li>
             <li class="nav-item">
                 <a href="../logout.php" class="nav-link">Log Out</a>

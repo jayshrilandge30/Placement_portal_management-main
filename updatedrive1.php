@@ -6,7 +6,7 @@ session_start();
 //If user Not logged in then redirect them back to homepage. 
 //This is required if user tries to manually enter view-job-post.php in URL.
 if (empty($_SESSION['id_jobpost'])) {
-    header("Location: ../index.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
     if ($conn->query($sql) === TRUE) {
         // $_SESSION['name'] = $companyname;
         //If data Updated successfully then redirect to dashboard
-        header("Location: my-job-post.php");
+        header("Location: active-jobs.php");
         exit();
     } else {
         echo "Error ";
@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
     }
 } else {
     //redirect them back to dashboard page if they didn't click update button
-    header("Location: updatedrive.php");
+    header("Location: active-jobs.php");
     exit();
 
     exit();

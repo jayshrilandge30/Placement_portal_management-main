@@ -67,32 +67,14 @@ require_once("../db.php");
             <section id="candidates" class="content-header">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-3">
-                            <div class="box box-solid">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Welcome <b><?php echo $_SESSION['name']; ?></b></h3>
-                                </div>
-                                <div class="box-body no-padding">
-                                    <ul class="nav nav-pills nav-stacked">
-                                        <li><a href="index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                                        <li><a href="edit-company.php"><i class="fa fa-tv"></i> Update Profile</a></li>
-                                        <li><a href="create-job-post.php"><i class="fa fa-file-o"></i> Post Drive</a></li>
-                                        <li class="active"><a href="my-job-post.php"><i class="fa fa-file-o"></i> Current Drives</a></li>
-                                        <li><a href="job-applications.php"><i class="fa fa-file-o"></i> Drive Applications</a></li>
-                                        <li><a href="mailbox.php"><i class="fa fa-envelope"></i> Mailbox</a></li>
-                                        <li><a href="settings.php"><i class="fa fa-gear"></i> Settings</a></li>
-                                        <li><a href="resume-database.php"><i class="fa fa-user"></i> Resume Database</a></li>
-                                        <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
-                                    </ul>
-                                    </ul>
-                                </div>
-                            </div>
+                        <div class="col-md-2">
+
                         </div>
 
 
 
 
-                        <div class="col-md-9 bg-white padding-2">
+                        <div class="col-md-8 bg-white padding-2">
                             <h2>Update Drive</h2>
                             <p>In this section you can change drive details.</p>
                             <div class="row">
@@ -144,8 +126,12 @@ require_once("../db.php");
                                 </form>
                             </div>
 
+                            <div class="col-md-2">
 
+                            </div>
                         </div>
+
+
 
 
 
