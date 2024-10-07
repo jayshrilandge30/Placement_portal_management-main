@@ -1,138 +1,72 @@
 {
-  "_from": "sweetalert",
-  "_id": "sweetalert@2.1.2",
+  "_from": "es6-object-assign@^1.1.0",
+  "_id": "es6-object-assign@1.1.0",
   "_inBundle": false,
-  "_integrity": "sha512-iWx7X4anRBNDa/a+AdTmvAzQtkN1+s4j/JJRWlHpYE8Qimkohs8/XnFcWeYHH2lMA8LRCa5tj2d244If3S/hzA==",
-  "_location": "/sweetalert",
+  "_integrity": "sha1-wsNYJlYkfDnqEHyx5mUrb58kUjw=",
+  "_location": "/es6-object-assign",
   "_phantomChildren": {},
   "_requested": {
-    "type": "tag",
+    "type": "range",
     "registry": true,
-    "raw": "sweetalert",
-    "name": "sweetalert",
-    "escapedName": "sweetalert",
-    "rawSpec": "",
+    "raw": "es6-object-assign@^1.1.0",
+    "name": "es6-object-assign",
+    "escapedName": "es6-object-assign",
+    "rawSpec": "^1.1.0",
     "saveSpec": null,
-    "fetchSpec": "latest"
+    "fetchSpec": "^1.1.0"
   },
   "_requiredBy": [
-    "#USER",
-    "/"
+    "/sweetalert"
   ],
-  "_resolved": "https://registry.npmjs.org/sweetalert/-/sweetalert-2.1.2.tgz",
-  "_shasum": "010baaa80d0dbdc86f96bfcaa96b490728594b79",
-  "_spec": "sweetalert",
-  "_where": "C:\\xampp\\htdocs\\pms",
+  "_resolved": "https://registry.npmjs.org/es6-object-assign/-/es6-object-assign-1.1.0.tgz",
+  "_shasum": "c2c3582656247c39ea107cb1e6652b6f9f24523c",
+  "_spec": "es6-object-assign@^1.1.0",
+  "_where": "C:\\xampp\\htdocs\\pms\\node_modules\\sweetalert",
   "author": {
-    "name": "Tristan Edwards",
-    "email": "tristan.edwards@me.com",
-    "url": "https://tristanedwards.me"
+    "name": "Rubén Norte",
+    "email": "rubennorte@gmail.com"
   },
   "bugs": {
-    "url": "https://github.com/t4t5/sweetalert/issues"
+    "url": "https://github.com/rubennorte/es6-object-assign/issues"
   },
   "bundleDependencies": false,
-  "collective": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/SweetAlert"
-  },
-  "dependencies": {
-    "es6-object-assign": "^1.1.0",
-    "promise-polyfill": "^6.0.2"
-  },
   "deprecated": false,
-  "description": "A beautiful replacement for JavaScript's \"alert\"",
+  "description": "ECMAScript 2015 (ES6) Object.assign polyfill and ponyfill",
   "devDependencies": {
-    "@sweetalert/with-react": "^0.1.1",
-    "@types/jest": "19.2.3",
-    "autoprefixer": "6.7.7",
-    "babel-core": "6.24.1",
-    "babel-loader": "6.4.1",
-    "babel-plugin-transform-es2015-modules-commonjs": "6.24.1",
-    "babel-plugin-transform-runtime": "6.23.0",
-    "babel-preset-env": "1.4.0",
-    "babel-preset-es2015": "6.24.1",
-    "babel-preset-react": "6.24.1",
-    "babel-standalone": "^6.26.0",
-    "babelify": "^6.0.2",
-    "browserify": "^9.0.8",
-    "copy-webpack-plugin": "^4.0.1",
-    "css-loader": "0.28.7",
-    "dts-bundle": "0.7.3",
-    "exports-loader": "0.6.4",
-    "expose-loader": "0.7.3",
-    "glob": "^5.0.3",
-    "jest": "19.0.2",
-    "jquery": "3.2.1",
-    "jus": "0.24.1",
-    "nodelist-foreach-polyfill": "^1.2.0",
-    "opencollective": "^1.0.3",
-    "path": "^0.11.14",
-    "postcss-color-function": "3.0.0",
-    "postcss-custom-properties": "5.0.2",
-    "postcss-easy-import": "2.0.0",
-    "postcss-loader": "1.3.3",
-    "postcss-nesting": "2.3.1",
-    "react": "15.5.4",
-    "react-dom": "15.5.4",
-    "source-map-loader": "0.2.1",
-    "style-loader": "0.18.2",
-    "sweetalert": "file:./",
-    "ts-jest": "19.0.14",
-    "ts-loader": "2.0.3",
-    "tslint": "5.1.0",
-    "tslint-loader": "3.5.2",
-    "typescript": "2.2.2",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "webpack": "3.5.5",
-    "webpack-bundle-analyzer": "2.9.0",
-    "webpack-dev-server": "2.4.2",
-    "webpack-merge": "4.1.0",
-    "whatwg-fetch": "^2.0.3"
+    "browserify": "^10.1.3",
+    "uglify-js": "^2.4.21"
   },
   "files": [
-    "dist",
-    "LICENSE.md",
-    "README.md",
-    "typings"
+    "index.js",
+    "auto.js",
+    "dist"
   ],
-  "homepage": "https://sweetalert.js.org/",
-  "jest": {
-    "verbose": true,
-    "transform": {
-      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json"
-    ]
-  },
+  "homepage": "https://github.com/rubennorte/es6-object-assign",
   "keywords": [
-    "sweetalert",
-    "alert",
-    "modal",
-    "popup"
+    "Object",
+    "assign",
+    "ES6",
+    "ECMAScript 6",
+    "ES2015",
+    "ECMAScript 2015",
+    "polyfill",
+    "ponyfill"
   ],
   "license": "MIT",
-  "main": "dist/sweetalert.min.js",
-  "name": "sweetalert",
+  "main": "index.js",
+  "name": "es6-object-assign",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/t4t5/sweetalert.git"
+    "url": "git+https://github.com/rubennorte/es6-object-assign.git"
   },
   "scripts": {
-    "build": "webpack -p",
-    "builddocs": "node_modules/jus/cli.js build docs-src docs",
-    "buildtest": "npm run build && jest",
-    "docs": "npm run build && node_modules/jus/cli.js serve docs-src",
-    "prepare": "npm run build && npm run builddocs",
-    "prepublishOnly": "npm run build",
-    "test": "jest"
+    "build": "npm run compile && npm run compress",
+    "compile": "npm run compile:manual && npm run compile:auto",
+    "compile:auto": "browserify auto.js -o dist/object-assign-auto.js",
+    "compile:manual": "browserify index.js -o dist/object-assign.js --standalone ObjectAssign",
+    "compress": "npm run compress:manual && npm run compress:auto",
+    "compress:auto": "uglifyjs dist/object-assign-auto.js --compress --mangle > dist/object-assign-auto.min.js",
+    "compress:manual": "uglifyjs dist/object-assign.js --compress --mangle > dist/object-assign.min.js"
   },
-  "types": "typings/sweetalert.d.ts",
-  "version": "2.1.2"
+  "version": "1.1.0"
 }
